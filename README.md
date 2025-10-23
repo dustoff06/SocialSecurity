@@ -1,9 +1,9 @@
 # Balancing Policy Objectives in Social Security Reform
 
-Authors: Arvind Sharma, Aleksandar Tomic, and Lawrence Fulton
-Affiliation: Department of Applied Analytics and Economics, Boston College
+**Authors:** Arvind Sharma, Aleksandar Tomic, and Lawrence Fulton  
+**Affiliation:** Department of Applied Analytics and Economics, Boston College
 
-A stochastic, multi-criteria decision framework (Hierarchical Weighted Multi-voting + Mixed-Integer Goal Programming) to evaluate 142 Social Security reform proposals across six policy dimensions: ICB, T, E, S, AF, PV. The optimization enforces a 3.5% actuarial balance constraint and explores uncertainty via Dirichlet-sampled weights.
+A stochastic, multi-criteria decision framework (Hierarchical Weighted Multi-voting + Mixed-Integer Goal Programming) is used to evaluate 142 Social Security reform proposals across six policy dimensions: **ICB**, **T**, **E**, **S**, **AF**, and **PV**. The optimization enforces a **3.5% actuarial balance constraint** and explores uncertainty through **Dirichlet-sampled weights**.
 
 ```bash
 ├─ paper/
