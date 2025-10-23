@@ -5,7 +5,7 @@ Affiliation: Department of Applied Analytics and Economics, Boston College
 
 A stochastic, multi-criteria decision framework (Hierarchical Weighted Multi-voting + Mixed-Integer Goal Programming) to evaluate 142 Social Security reform proposals across six policy dimensions: ICB, T, E, S, AF, PV. The optimization enforces a 3.5% actuarial balance constraint and explores uncertainty via Dirichlet-sampled weights.
 
-.
+```bash
 ├─ paper/
 │  ├─ paper.tex            # Main LaTeX (apa7 + biblatex/biber)
 │  ├─ references.bib       # Bibliography
@@ -25,4 +25,4 @@ A stochastic, multi-criteria decision framework (Hierarchical Weighted Multi-vot
 │
 ├─ LICENSE
 └─ README.md
-
+```
