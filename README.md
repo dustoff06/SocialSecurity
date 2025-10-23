@@ -166,8 +166,9 @@ R Markdown can’t find data: verify files in data/raw/ and paths used in analys
 
 ## Contact
 
-# Corresponding author:
-Arvind Sharma
-Department of Applied Analytics and Economics, Boston College
-140 Commonwealth Avenue, Chestnut Hill, MA 02467
-Email: arvind.sharma@bc.edu
+**Corresponding author:**  
+Arvind Sharma  
+Department of Applied Analytics and Economics, Boston College  
+140 Commonwealth Avenue, Chestnut Hill, MA 02467  
+Email: [arvind.sharma@bc.edu](mailto:arvind.sharma@bc.edu)
+
