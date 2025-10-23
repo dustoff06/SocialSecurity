@@ -26,3 +26,148 @@ A stochastic, multi-criteria decision framework (Hierarchical Weighted Multi-vot
 ├─ LICENSE
 └─ README.md
 ```
+## 1. LaTeX toolchain (paper)
+
+The paper uses apa7 + biblatex with biber.
+
+Build sequence (local):
+```bash
+cd paper
+pdflatex paper.tex
+biber paper
+pdflatex paper.tex
+pdflatex paper.tex
+```
+
+* Required packages (already used in the preamble):
+apa7, babel, csquotes, biblatex with \DeclareLanguageMapping{american}{american-apa}, booktabs, amsmath, amssymb, graphicx, threeparttable, siunitx.
+
+## 2.  R environment (analysis)
+
+This repo uses a single R Markdown file:
+
+updated SS 4_23.Rmd renders to PDF and writes any LaTeX-ready tables/figures into paper/tables/ and paper/figures/.
+
+Suggested R packages:
+```bash
+install.packages(c(
+  "corrplot", "eia", "EnvStats", "fitdistrplus", "fpp3", "fredr", "ggpattern",
+  "ggrepel", "gridExtra", "gtools", "kableExtra", "knitr", "latex2exp", "lpSolveAPI",
+  "MASS", "magrittr", "MCMCpack", "metR", "psych", "readxl", "ResourceSelection",
+  "tidyverse", "viridis", "data.table", "jsonlite", "here", "rmarkdown"
+))
+```
+
+## Data
+
+Location: data/raw/ (raw inputs only).
+
+No processed data are committed; all derivatives are produced at render time by Rmd.
+
+## Reproducibility
+
+This analysis is designed to be fully reproducible and deterministic. All key settings and parameters are documented within the main RMD file.
+
+### Determinism
+
+To ensure reproducibility across runs:
+
+- A fixed random seed is set at the start of the analysis:
+  
+  ```r
+  set.seed(42)
+.
+
+### Key Knobs (documented in the Rmd)
+
+- **Dirichlet Parameters**  
+  - \( \alpha \): construct-level weights  
+  - \( \beta \): within-construct model weights
+
+- **Penalty Parameter**  
+  - \( \lambda \sim \text{Uniform}(0.2, 0.7) \)
+
+- **Portfolio Size**  
+  - \( N_{\text{max}} \in \{ 1, 2, 3, 4, 5, 6 \} \)
+
+- **Actuarial Baselines**  
+  - Trustees’ actuarial assumptions year (fixed for the analysis)
+
+## How the Pieces Fit
+
+### .RMD
+
+- Loads raw inputs from `data/raw/`  
+- Cleans and validates COAs and scores  
+- Samples Dirichlet weights (construct + model)  
+- Solves MILPs using `lpSolveAPI`, enforcing a 3.5% balance constraint  
+- Runs sensitivity analyses (Jaccard similarity, Cohen’s κ, scenario perturbations)  
+- Exports tables and figures to `paper/tables/` and `paper/figures/`  
+- Renders an optional PDF supplement report
+
+### `paper/paper.tex`
+
+- Includes exported tables and figures  
+- Contains **Appendix A/B/C** as separate TeX files in `paper/appendices/`  
+- Builds the final manuscript PDF with references drawn from `references.bib`
+
+---
+
+## Appendices (included in the paper)
+
+### Appendix A – Complete Optimization Model Specification
+Full MILP and goal programming formulation, including decision variables, constraints, linearizations, and solver settings.
+
+### Appendix B – Simulation Algorithm
+End-to-end algorithm description: Dirichlet sampling, objective construction, constraint enforcement, optimization loop, convergence checks, and export steps.
+
+### Appendix C – Inter-Rater Reliability Statistics
+Spearman rank correlations and weighted Cohen’s \( \kappa \) across models and constructs, including interpretation thresholds and confidence intervals.
+
+These appendices are part of the LaTeX paper (`paper/appendices/*.tex`) and are also described in the R Markdown file where the computations are performed.
+
+---
+
+## Citing
+
+If you use this repository or analyses, please cite:
+
+**APA (example):**  
+Sharma, A., Tomic, A., & Fulton, L. (2025). *Balancing Policy Objectives in Social Security Reform: A Decision-Analytic Approach.* Department of Applied Analytics and Economics, Boston College. Manuscript.
+
+These appendices are part of the LaTeX paper (paper/appendices/*.tex) and are also described in the R Markdown where the computations are performed.
+
+## BibLaTeX:
+
+@unpublished{sharma_tomic_fulton_2025_balancing,
+  author = {Sharma, Arvind and Tomic, Aleksandar and Fulton, Lawrence},
+  title  = {Balancing Policy Objectives in Social Security Reform: A Decision-Analytic Approach},
+  year   = {2025},
+  note   = {Manuscript, Department of Applied Analytics and Economics, Boston College}
+}
+
+License
+
+Code: MIT
+
+Text (paper and appendices): CC BY 4.0
+
+Data: Per source terms; include provenance and any redistribution limits in data/raw/README.md.
+
+## Common Pitfalls
+
+References don’t appear: run biber (not BibTeX) between LaTeX passes.
+
+Float ended by wrong environment: ensure \begin{table} matches \end{table} (avoid table* unless two-column).
+
+Undefined citation: key not present in references.bib; add it or fix the key.
+
+R Markdown can’t find data: verify files in data/raw/ and paths used in analysis.Rmd.
+
+## Contact
+
+# Corresponding author:
+Arvind Sharma
+Department of Applied Analytics and Economics, Boston College
+140 Commonwealth Avenue, Chestnut Hill, MA 02467
+Email: arvind.sharma@bc.edu
